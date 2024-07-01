@@ -1,0 +1,38 @@
+# -- Yaml config file for CNDB (MySQL) Migration -- #
+version: test
+
+# -- Basic script needs -- #
+max_threads_number: 16
+
+# -- Bash Command templates-- #
+template_commands:
+  only_dump_table: mysqldump --default-character-set=utf8mb4 --quote-names --single-transaction --extended-insert --max_allowed_packet=512M --quick --hex-blob --routines -u{export_username} -p{export_password} --databases {schema} --tables {table} --result-file={temp_file_path}
+  only_read_table: mysql --host={import_host} -u{import_username} -p{import_password} {import_schema} -e "source {file_path}"
+  only_dump_schema:
+  only_read_schema:
+  dump_and_read_table: MYSQL_PWD={export_password} mysqldump --default-character-set=utf8mb4 --quote-names --single-transaction --extended-insert --max_allowed_packet=512M --quick --hex-blob --routines -u{export_username} --databases {schema} --tables {table} | MYSQL_PWD={import_password} mysql --host={import_database} -u{import_username} {schema} | echo '* {schema}.{table} * migration is completed'
+  dump_and_read_schema: MYSQL_PWD={export_password} mysqldump --default-character-set=utf8mb4 --quote-names --single-transaction --extended-insert --max_allowed_packet=512M --quick --hex-blob --routines -u{export_username} --databases {schema} | MYSQL_PWD={import_password} mysql --host={import_database} -u{import_username} {schema} | echo '* {schema} * migration is completed'
+
+
+# -- Servers configs -- #
+export_server:
+  host:
+  username:
+  password:
+
+import_server:
+  host:
+  username:
+  password:
+
+
+# -- Databases Configs -- #
+export_database:
+  host:
+  username:
+  password:
+
+import_database:
+  host:
+  username:
+  password:
