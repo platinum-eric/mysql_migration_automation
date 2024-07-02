@@ -8,5 +8,4 @@
 
 - __Config file__:
   - _config.yaml_:  load all your configurations you need
-  - _data_obj.yaml_:  the data object of your database, schemas and tables are both fine to migration. 
-
+  - _data_obj.yaml_:  The data objects in your database, including both schemas and tables, are ready for migration. Additionally, you have the option to migrate only schemas or only tables.
