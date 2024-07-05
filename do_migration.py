@@ -78,7 +78,6 @@ class SSHConnector:
                                             allow_agent=False, timeout=5.0)
                 except paramiko.ssh_exception.SSHException:
                     self.connection.get_transport().auth_none(self.username)
-                    self.connection.exec_command('uname -a')
                 self.connection.sftp = paramiko.SFTPClient.from_transport(self.connection.get_transport())
             Logging.info(f"Successfully established connection to {self.ip}")
 
@@ -238,7 +237,7 @@ def test_main():  # Test main function
 
     for data_obj in data_objs_list:
         command = generate_commands_list(configs=configs, data_obj=data_obj)
-        stdin, stdout, stderr = export_server.connection.exec_command(command)  # 执行命令并获取命令结果 : stdin为输入的命令 / stdout为命令返回的结果 / stderr为命令错误时返回的结果
+        stdin, stdout, stderr = export_server.connection.exec_command(command)
         Logging.info(f"Start to migrate: * {data_obj} * ")
         stdout_content = decode_result(stdout.read()).strip().replace('\n', ' ')
         stderr_content = decode_result(stderr.read()).strip().replace('\n', ' ')
