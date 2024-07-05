@@ -1,5 +1,8 @@
+# Format - one line a schema name
 schemas:
   test
 
+
+# Format - one line a schema.table name like below sample shown
 tables:
-  config.defaults
+  test.test
