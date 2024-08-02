@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # ***************************************************************************************************************************
 
 # This script for migrating MySQL data object to another MySQL database, it's suitable for the version from 5.7 to above.
@@ -16,8 +18,6 @@
 #   None
 
 # ***************************************************************************************************************************
-
-# -*- coding: utf-8 -*-
 
 import yaml
 import time
